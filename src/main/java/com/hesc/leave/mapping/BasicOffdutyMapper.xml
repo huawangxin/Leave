@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hesc.leave.dao.BasicOffdutyDao" >
+    <resultMap id="BaseResultMap" type="com.hesc.leave.pojo.BasicOffduty" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="department" property="department" jdbcType="VARCHAR" />
+        <result column="ovetime_start" property="ovetimeStart" jdbcType="VARCHAR" />
+        <result column="ovetime_over" property="ovetimeOver" jdbcType="VARCHAR" />
+        <result column="overtime" property="overtime" jdbcType="VARCHAR" />
+        <result column="reason" property="reason" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, department, ovetime_start, ovetime_over, overtime, reason, state, sort, 
+        create_time
+    </sql>
+
+    <insert id="insert" parameterType="com.hesc.leave.pojo.BasicOffduty" >
+        insert into basic_offduty (id, name, department, 
+            ovetime_start, ovetime_over, overtime, 
+            reason, state, sort, 
+            create_time)
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+            #{ovetimeStart,jdbcType=VARCHAR}, #{ovetimeOver,jdbcType=VARCHAR}, #{overtime,jdbcType=VARCHAR}, 
+            #{reason,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{sort,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=BIGINT})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.String" >
+        delete from basic_offduty
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="delete" parameterType="com.hesc.leave.pojo.BasicOffduty" >
+        delete from basic_offduty
+        <trim prefix="where" prefixOverrides="and|or" >
+            <if test="name != null" >
+                 and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="department != null" >
+                 and department = #{department,jdbcType=VARCHAR}
+            </if>
+            <if test="ovetimeStart != null" >
+                 and ovetime_start = #{ovetimeStart,jdbcType=VARCHAR}
+            </if>
+            <if test="ovetimeOver != null" >
+                 and ovetime_over = #{ovetimeOver,jdbcType=VARCHAR}
+            </if>
+            <if test="overtime != null" >
+                 and overtime = #{overtime,jdbcType=VARCHAR}
+            </if>
+            <if test="reason != null" >
+                 and reason = #{reason,jdbcType=VARCHAR}
+            </if>
+            <if test="state != null" >
+                 and state = #{state,jdbcType=VARCHAR}
+            </if>
+            <if test="sort != null" >
+                 and sort = #{sort,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                 and create_time = #{createTime,jdbcType=BIGINT}
+            </if>
+        </trim>
+    </delete>
+
+    <update id="update" parameterType="com.hesc.leave.pojo.BasicOffduty" >
+        update basic_offduty
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null" >
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="ovetimeStart != null" >
+                ovetime_start = #{ovetimeStart,jdbcType=VARCHAR},
+            </if>
+            <if test="ovetimeOver != null" >
+                ovetime_over = #{ovetimeOver,jdbcType=VARCHAR},
+            </if>
+            <if test="overtime != null" >
+                overtime = #{overtime,jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null" >
+                reason = #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null" >
+                state = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from basic_offduty
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+	<select id="selectByName" resultMap="BaseResultMap" parameterType="com.hesc.leave.pojo.BasicOffduty" >
+        select 
+        <include refid="Base_Column_List" />
+        from basic_offduty
+        where name = #{name,jdbcType=VARCHAR}
+        order by sort asc, create_time desc
+    </select>
+
+    <select id="selectCount" parameterType="com.hesc.leave.pojo.BasicOffduty" resultType="java.lang.Long" >
+        select count(*) from basic_offduty
+        <trim prefix="where" prefixOverrides="and|or" >
+            <if test="name != null" >
+                 and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="department != null" >
+                 and department = #{department,jdbcType=VARCHAR}
+            </if>
+            <if test="ovetimeStart != null" >
+                 and ovetime_start = #{ovetimeStart,jdbcType=VARCHAR}
+            </if>
+            <if test="ovetimeOver != null" >
+                 and ovetime_over = #{ovetimeOver,jdbcType=VARCHAR}
+            </if>
+            <if test="overtime != null" >
+                 and overtime = #{overtime,jdbcType=VARCHAR}
+            </if>
+            <if test="reason != null" >
+                 and reason = #{reason,jdbcType=VARCHAR}
+            </if>
+            <if test="state != null" >
+                 and state = #{state,jdbcType=VARCHAR}
+            </if>
+            <if test="sort != null" >
+                 and sort = #{sort,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                 and create_time = #{createTime,jdbcType=BIGINT}
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectList" parameterType="com.hesc.leave.pojo.BasicOffduty" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from basic_offduty
+        <trim prefix="where" prefixOverrides="and|or" >
+            <if test="name != null" >
+                 and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="department != null" >
+                 and department = #{department,jdbcType=VARCHAR}
+            </if>
+            <if test="ovetimeStart != null" >
+                 and ovetime_start = #{ovetimeStart,jdbcType=VARCHAR}
+            </if>
+            <if test="ovetimeOver != null" >
+                 and ovetime_over = #{ovetimeOver,jdbcType=VARCHAR}
+            </if>
+            <if test="overtime != null" >
+                 and overtime = #{overtime,jdbcType=VARCHAR}
+            </if>
+            <if test="reason != null" >
+                 and reason = #{reason,jdbcType=VARCHAR}
+            </if>
+            <if test="state != null" >
+                 and state = #{state,jdbcType=VARCHAR}
+            </if>
+            <if test="sort != null" >
+                 and sort = #{sort,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                 and create_time = #{createTime,jdbcType=BIGINT}
+            </if>
+        </trim>
+         order by sort asc, create_time desc
+    </select>
+
+	<select id="selectListMonth" parameterType="com.hesc.leave.pojo.BasicOffduty" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from basic_offduty
+        where department like #{department,jdbcType=VARCHAR}
+        or ovetime_start like #{ovetimeStart,jdbcType=VARCHAR}
+        or state = #{state,jdbcType=VARCHAR}
+        order by id asc, create_time desc
+    </select>
+
+	<select id="selectPageListMonth" parameterType="com.hesc.trundle.db.page.Page" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from basic_offduty
+        <trim prefix="where" prefixOverrides="and|or|like" >
+            <if test="params.name != null" >
+                 and name like #{params.name,jdbcType=VARCHAR}
+            </if>
+            <if test="params.ovetimeOver != null" >
+                 and ovetime_over = #{params.ovetimeOver,jdbcType=VARCHAR}
+            </if>
+            <if test="params.overtime != null" >
+                 and overtime = #{params.overtime,jdbcType=VARCHAR}
+            </if>
+            <if test="params.reason != null" >
+                 and reason = #{params.reason,jdbcType=VARCHAR}
+            </if>
+            <if test="params.state != null" >
+                 and state = #{params.state,jdbcType=VARCHAR}
+            </if>
+            <if test="params.sort != null" >
+                 and sort = #{params.sort,jdbcType=VARCHAR}
+            </if>
+            <if test="params.createTime != null" >
+                 and create_time = #{params.createTime,jdbcType=BIGINT}
+            </if>
+            <if test="params.ovetimeStart != null" >
+                 and ovetime_start like #{params.ovetimeStart,jdbcType=VARCHAR}
+            </if>
+            <if test="params.department0 != null" >
+                 and (department = #{params.department0,jdbcType=VARCHAR}
+            </if>
+            <if test="params.department1 != null" >
+                 or department = #{params.department1,jdbcType=VARCHAR} )
+            </if>
+        </trim>
+         order by sort asc, create_time desc
+    </select>
+
+    <select id="selectPageList" parameterType="com.hesc.trundle.db.page.Page" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from basic_offduty
+        <trim prefix="where" prefixOverrides="and|or" >
+            <if test="params.name != null" >
+                 and name = #{params.name,jdbcType=VARCHAR}
+            </if>
+            <if test="params.department != null" >
+                 and department = #{params.department,jdbcType=VARCHAR}
+            </if>
+            <if test="params.ovetimeStart != null" >
+                 and ovetime_start = #{params.ovetimeStart,jdbcType=VARCHAR}
+            </if>
+            <if test="params.ovetimeOver != null" >
+                 and ovetime_over = #{params.ovetimeOver,jdbcType=VARCHAR}
+            </if>
+            <if test="params.overtime != null" >
+                 and overtime = #{params.overtime,jdbcType=VARCHAR}
+            </if>
+            <if test="params.reason != null" >
+                 and reason = #{params.reason,jdbcType=VARCHAR}
+            </if>
+            <if test="params.state != null" >
+                 and state = #{params.state,jdbcType=VARCHAR}
+            </if>
+            <if test="params.sort != null" >
+                 and sort = #{params.sort,jdbcType=VARCHAR}
+            </if>
+            <if test="params.createTime != null" >
+                 and create_time = #{params.createTime,jdbcType=BIGINT}
+            </if>
+        </trim>
+         order by sort asc, create_time desc
+    </select>
+
+</mapper>
